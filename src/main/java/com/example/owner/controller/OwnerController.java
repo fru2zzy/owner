@@ -1,12 +1,12 @@
 package com.example.owner.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import com.example.owner.exception.OwnerNotFoundException;
 import com.example.owner.model.Owner;
+import com.example.owner.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RequestMapping("/api/owner")
 public class OwnerController {
-    List<Owner> ownerList = new ArrayList<>();
+
+    private OwnerRepository ownerRepository;
 
     @Value("${main.owner.name}")
     private String mainOwner;
 
-    public OwnerController() {
-        ownerList.add(new Owner(20, "Alex", "Moscow"));
-        ownerList.add(new Owner(44, "Max", "Tagil"));
-        ownerList.add(new Owner(20, "Andy", "Kyiv"));
+    public OwnerController(OwnerRepository ownerRepository) {
+        this.ownerRepository = ownerRepository;
     }
 
     @GetMapping
@@ -37,23 +36,17 @@ public class OwnerController {
     }
 
     @GetMapping("/list")
-    public String getOwnerList() {
-        return mainOwner;
+    public List<Owner> getOwnerList() {
+        return ownerRepository.findAll();
     }
 
     @PostMapping
     public Owner postOwner(@Valid @RequestBody Owner owner) {
-        ownerList.add(owner);
-        return owner;
+        return ownerRepository.save(owner);
     }
 
     @GetMapping("/{ids}")
     public Owner getCatById(@PathVariable(name = "ids") int id) throws OwnerNotFoundException {
-        int ownerListSize = ownerList.size();
-        if (ownerListSize > id) {
-            return ownerList.get(id);
-        } else {
-            throw new OwnerNotFoundException("Cannot return an owner with index " + id + " because owner list size = " + ownerListSize);
-        }
+        return ownerRepository.findById(id).orElseThrow(() -> new OwnerNotFoundException("Cannot find owner by id = " + id));
     }
 }
