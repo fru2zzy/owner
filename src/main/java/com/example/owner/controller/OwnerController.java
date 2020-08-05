@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RefreshScope
-@RequestMapping("/api/owner")
+@RequestMapping("/owner")
 public class OwnerController {
 
     private OwnerRepository ownerRepository;
