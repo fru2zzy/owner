@@ -76,11 +76,12 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-<!--        <Feign>-->
+        <!--        <Feign>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!--        <Feign>-->
     </dependencies>
 
     <dependencyManagement>
