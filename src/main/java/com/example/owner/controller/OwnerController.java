@@ -5,8 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.example.owner.exception.OwnerNotFoundException;
+import com.example.owner.model.Cat;
 import com.example.owner.model.Owner;
 import com.example.owner.repository.OwnerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +18,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
 @RestController
 @RefreshScope
 @RequestMapping("/owner")
 public class OwnerController {
 
     private OwnerRepository ownerRepository;
+
+    @Autowired
+    CatController catController;
 
     @Value("${main.owner.name}")
     private String mainOwner;
@@ -35,9 +42,10 @@ public class OwnerController {
         return mainOwner;
     }
 
-    @GetMapping("/list")
-    public List<Owner> getOwnerList() {
-        return ownerRepository.findAll();
+    @GetMapping(value = "/list", produces = APPLICATION_JSON)
+    public List<Cat> getOwnerList() {
+        return catController.getAll();
+        //return ownerRepository.findAll();
     }
 
     @PostMapping
