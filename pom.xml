@@ -76,12 +76,21 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!--        <Feign>-->
+        <!--<Feign>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!--        <Feign>-->
+        <!--<Feign>-->
+
+        <!--<Hystrix>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+            <version>1.4.7.RELEASE</version>
+        </dependency>
+        <!--<Hystrix>-->
+
     </dependencies>
 
     <dependencyManagement>
