@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableEurekaClient
 @EnableFeignClients
 @EnableHystrixDashboard
-@EnableCircuitBreaker
+//@EnableCircuitBreaker
 public class OwnerApplication {
 
     public static void main(String[] args) {
