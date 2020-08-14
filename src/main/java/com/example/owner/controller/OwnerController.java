@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.example.owner.CatClient;
-import com.example.owner.exception.OwnerNotFoundException;
 import com.example.owner.model.Cat;
 import com.example.owner.model.Owner;
 import com.example.owner.repository.OwnerRepository;
