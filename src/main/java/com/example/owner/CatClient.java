@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@FeignClient(name = "cat-dog", url = "https://cat-dog-denis.herokuapp.com:80", fallback = CatClient.FallBackController.class)
+@FeignClient(name = "cat-dog", url = "http://cat-dog-denis.herokuapp.com:80", fallback = CatClient.FallBackController.class)
 public interface CatClient {
 
     @Component

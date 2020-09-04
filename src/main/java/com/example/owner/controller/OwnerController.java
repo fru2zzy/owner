@@ -8,7 +8,6 @@ import com.example.owner.CatClient;
 import com.example.owner.model.Cat;
 import com.example.owner.model.Owner;
 import com.example.owner.repository.OwnerRepository;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,12 +31,9 @@ public class OwnerController {
         this.catClient = catClient;
     }
 
-    @Value("${main.owner.name}")
-    private String mainOwner;
-
     @GetMapping
     public String getOwner() {
-        return mainOwner;
+        return "mainOwner";
     }
 
     @GetMapping(value = "/list", produces = APPLICATION_JSON)
